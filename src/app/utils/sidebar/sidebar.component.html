@@ -1,0 +1,40 @@
+<div class="container-fluid position-fixed">
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark " >
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <a routerLink="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-3 d-none d-sm-inline">Menu</span>
+          </a>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li *ngFor="let item of listMenu; let i = index" class="nav-item">
+              <a href="#" (click)="toggleSubmenu(i)" class="nav-link align-middle px-0">
+                <i [ngClass]="item.icon" class="fs-4 me-2"></i> <span class="ms-1 d-none d-sm-inline">{{ item.title }}</span>
+              </a>
+              <ul *ngIf="openSubmenuIndex === i" class="nav flex-column ms-4">
+                <li *ngFor="let subItem of item.submenu" class="w-100">
+                  <a [routerLink]="subItem.route" class="nav-link px-0">
+                    <i [ngClass]="subItem.icon" class="fs-6 me-1"></i> <span class="d-none d-sm-inline typeLetter">{{ subItem.title }}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <hr>
+          <div class="dropdown pb-4">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="hugenerd" width="40" height="40" class="rounded-circle">
+              <span class="d-none d-sm-inline mx-1">loser</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
