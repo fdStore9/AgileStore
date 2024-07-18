@@ -3,6 +3,13 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from '../models/usuario.model';
 import { Subscription } from 'rxjs';
+import { FirebaseError } from 'firebase/app';
+
+interface CreateUserResponse {
+  status: number;
+  user?: Usuario;
+  error?: any;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -29,19 +36,33 @@ export class LoginService {
     });
 
   }
-  async createUser(password: string, email: string, nombre: string, apellido: string, rol: string): Promise<void> {
+  async createUser(password: string, email: string, nombre: string, apellido: string, rol: string): Promise<CreateUserResponse> {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
       if (user) {
         const newUser = new Usuario(user.uid, nombre, user.email!, apellido, rol, password);
         await this.firestore.doc(`profiles/${user.uid}`).set({ ...newUser });
+        return { status: 200, user: newUser };
       }
+      return { status: 400, error: 'Error al crear usuario' };
     } catch (error) {
-      console.error('Error creating user:', error);
-      throw error;
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            return { status: 409, error: 'El usuario ya existe' };
+          case 'auth/invalid-email':
+            return { status: 400, error: 'Correo electrónico inválido' };
+          case 'auth/weak-password':
+            return { status: 400, error: 'La contraseña debe tener al menos 6 caracteres' };
+          default:
+            return { status: 400, error: error.message || 'Error al crear usuario' };
+        }
+      }
+      return { status: 400, error: 'Error desconocido' };
     }
   }
+
   validateCredentials(email: string, password: string) {
     return this.auth.signInWithEmailAndPassword(email, password);
   }

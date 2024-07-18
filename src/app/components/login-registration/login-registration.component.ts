@@ -1,20 +1,36 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { title } from 'process';
 import { LoginService } from '../../services/login.service';
 import { Usuario } from '../../models/usuario.model';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.reducer';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SweetAlert } from '../../shared/Alerts';
+import { MessagesToShow } from '../../shared/enums';
+import * as ui from '../../shared/ui.actions';
 
 @Component({
   selector: 'app-login-registration',
   templateUrl: './login-registration.component.html',
   styleUrl: './login-registration.component.css'
 })
-export class LoginRegistrationComponent implements OnInit {
+export class LoginRegistrationComponent implements OnInit, OnDestroy {
   isLoginActive: boolean;
   ListInputLoginForm: Array<any>;
   ListInputRegisterForm: Array<any>;
   getForms: Usuario;
-  constructor(private readonly loginService: LoginService) {
+  uiSubscription: Subscription;
+  isLoading: boolean = false;
+  alerts: SweetAlert;
+
+  constructor(private readonly loginService: LoginService,
+    private store: Store<AppState>,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {
     this.isLoginActive = true;
     this.ListInputRegisterForm = [
       {
@@ -85,19 +101,36 @@ export class LoginRegistrationComponent implements OnInit {
         icon: 'bi-lock'
       }
     ];
+    this.alerts = new SweetAlert();
   }
   ngOnInit(): void {
+    this.uiSubscription = this.store.select('ui')
+      .subscribe(ui => {
+        this.isLoading = ui.isLoading;
+        if (this.isLoading) {
+          this.spinner.show();
+        } else {
+          this.spinner.hide();
+        }
+      });
+  }
 
+  ngOnDestroy() {
+    this.uiSubscription.unsubscribe();
   }
   changueForm(name: string): void {
     this.isLoginActive = name === 'login';
   }
   login(formsValue: any) {
+    this.store.dispatch(ui.isLoading());
     if (this.isLoginActive) {
       this.loginService.validateCredentials(
         formsValue.email.value,
         formsValue.Contrasenia.value
-      ).then(rs => { console.log(rs, 'login') })
+      ).then(rs => {
+        this.store.dispatch(ui.stopLoading());
+        this.router.navigate(['/']);
+      });
     } else {
       this.loginService.createUser(
         formsValue.contraseniaR.value,
@@ -105,7 +138,13 @@ export class LoginRegistrationComponent implements OnInit {
         formsValue.name.value,
         formsValue.lastName.value,
         formsValue.role.value
-      ).then(rs => { console.log(rs, 'respuesta'); })
+      ).then(rs => {
+        this.store.dispatch(ui.stopLoading());
+        rs.status === 200 ?
+          this.alerts.showAlert(MessagesToShow.success.GOOD, "success", MessagesToShow.success.SUCCESSFUL_REGISTRATION) :
+          this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error)
+      });
     }
   }
+
 }
