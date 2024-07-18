@@ -1,6 +1,8 @@
 import { Component, input, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { title } from 'process';
+import { LoginService } from '../../services/login.service';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-login-registration',
@@ -11,8 +13,8 @@ export class LoginRegistrationComponent implements OnInit {
   isLoginActive: boolean;
   ListInputLoginForm: Array<any>;
   ListInputRegisterForm: Array<any>;
-  getForms: any;
-  constructor() {
+  getForms: Usuario;
+  constructor(private readonly loginService: LoginService) {
     this.isLoginActive = true;
     this.ListInputRegisterForm = [
       {
@@ -80,7 +82,7 @@ export class LoginRegistrationComponent implements OnInit {
         type: 'password',
         placeholder: 'Ingrese Contraseña',
         validation: [Validators.required],
-         icon: 'bi-lock'
+        icon: 'bi-lock'
       }
     ];
   }
@@ -90,8 +92,20 @@ export class LoginRegistrationComponent implements OnInit {
   changueForm(name: string): void {
     this.isLoginActive = name === 'login';
   }
-  recibirMensaje(message: string) {
-    this.getForms = message;
-    console.log(this.getForms, 'gano');
+  login(formsValue: any) {
+    if (this.isLoginActive) {
+      this.loginService.validateCredentials(
+        formsValue.email.value,
+        formsValue.Contrasenia.value
+      ).then(rs => { console.log(rs, 'login') })
+    } else {
+      this.loginService.createUser(
+        formsValue.contraseniaR.value,
+        formsValue.email.value,
+        formsValue.name.value,
+        formsValue.lastName.value,
+        formsValue.role.value
+      ).then(rs => { console.log(rs, 'respuesta'); })
+    }
   }
 }

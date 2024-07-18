@@ -33,12 +33,12 @@
                             <div *ngIf="isLoginActive" class="tab-pane fade show active" id="pills-login"
                                 role="tabpanel" aria-labelledby="tab-login">
                                 <app-forms [ListForms]="this.ListInputLoginForm"
-                                    (formsValue)="recibirMensaje($event)"></app-forms>
+                                    (formsValue)="login($event)"></app-forms>
                             </div>
                             <div *ngIf="!isLoginActive" class="tab-pane fade show active" id="pills-register"
                                 role="tabpanel" aria-labelledby="tab-register">
                                 <app-forms [ListForms]="this.ListInputRegisterForm"
-                                    (formsValue)="recibirMensaje($event)"></app-forms>
+                                    (formsValue)="login($event)"></app-forms>
                             </div>
                         </div>
                     </div>
