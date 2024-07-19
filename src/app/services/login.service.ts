@@ -63,8 +63,26 @@ export class LoginService {
     }
   }
 
-  validateCredentials(email: string, password: string) {
-    return this.auth.signInWithEmailAndPassword(email, password);
+  async validateCredentials(email: string, password: string): Promise<{ status: number, error?: string }> {
+    try {
+      await this.auth.signInWithEmailAndPassword(email, password);
+      return { status: 200 };
+    } catch (error) {
+      let errorMessage = 'Unknown error';
+      if (error instanceof FirebaseError && error.code) {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            errorMessage = 'Usuario no encontrado';
+            break;
+          case 'auth/wrong-password':
+            errorMessage = 'Contraseña incorrecta';
+            break;
+          default:
+            errorMessage = 'Error de autenticación';
+        }
+      }
+      return { status: 400, error: errorMessage };
+    }
   }
   logout() {
     return this.auth.signOut();

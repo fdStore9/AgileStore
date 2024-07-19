@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
+import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +11,10 @@ import { MenuService } from '../../services/menu.service';
 export class SidebarComponent implements OnInit {
   listMenu: Array<any>;
   openSubmenuIndex: number | null = null;
-  constructor(private readonly menu: MenuService) {
+  constructor(private readonly menu: MenuService,
+    private readonly loginService: LoginService,
+    private router: Router
+  ) {
     this.listMenu = new Array<any>();
   }
   ngOnInit(): void {
@@ -19,5 +24,11 @@ export class SidebarComponent implements OnInit {
   }
   toggleSubmenu(index: number): void {
     this.openSubmenuIndex = this.openSubmenuIndex === index ? null : index;
+  }
+  logout() {
+    this.loginService.logout().then(() => {
+      this.router.navigate(['/']);
+    })
+
   }
 }

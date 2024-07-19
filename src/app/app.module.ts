@@ -18,16 +18,16 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-interface NgxSpinnerConfig {
-  type?: string;
-}
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     LoginRegistrationComponent,
     FormsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

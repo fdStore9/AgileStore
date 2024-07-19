@@ -121,6 +121,9 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
   changueForm(name: string): void {
     this.isLoginActive = name === 'login';
   }
+  getFormvalue(formsValue: any) {
+    this.isLoginActive ? this.login(formsValue) : this.createUser(formsValue);
+  }
   login(formsValue: any) {
     this.store.dispatch(ui.isLoading());
     if (this.isLoginActive) {
@@ -129,22 +132,24 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
         formsValue.Contrasenia.value
       ).then(rs => {
         this.store.dispatch(ui.stopLoading());
-        this.router.navigate(['/']);
-      });
-    } else {
-      this.loginService.createUser(
-        formsValue.contraseniaR.value,
-        formsValue.email.value,
-        formsValue.name.value,
-        formsValue.lastName.value,
-        formsValue.role.value
-      ).then(rs => {
-        this.store.dispatch(ui.stopLoading());
-        rs.status === 200 ?
-          this.alerts.showAlert(MessagesToShow.success.GOOD, "success", MessagesToShow.success.SUCCESSFUL_REGISTRATION) :
-          this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error)
+        rs.status === 200 ? this.router.navigate(['/userProfile']) :
+        this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error || "")
       });
     }
+  }
+  createUser(formsValue: any) {
+    this.loginService.createUser(
+      formsValue.contraseniaR.value,
+      formsValue.email.value,
+      formsValue.name.value,
+      formsValue.lastName.value,
+      formsValue.role.value
+    ).then(rs => {
+      this.store.dispatch(ui.stopLoading());
+      rs.status === 200 ?
+        this.alerts.showAlert(MessagesToShow.success.GOOD, "success", MessagesToShow.success.SUCCESSFUL_REGISTRATION) :
+        this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error)
+    });
   }
 
 }

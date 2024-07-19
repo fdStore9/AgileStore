@@ -1,9 +1,7 @@
-
-.typeLetter{
+.typeLetter {
     color: var(--background-color);
     font-family: 'Nunito-Bold', sans-serif;
 }
-.d-sm-inline{
-    font-family: 'Nunito-Bold', sans-serif;
-    color: var(--background-color);
+.icon-blue {
+    color: var(--events-default) !important;
 }
