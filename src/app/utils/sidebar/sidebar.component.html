@@ -35,7 +35,7 @@
         <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-decoration-none" id="dropdownUser1"
           role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="https://github.com/mdo.png" class="rounded-circle" height="45" alt="User Avatar" loading="lazy" />
-          <span class="mx-1 typeLetter" style="font-size: 18px;">loser</span>
+          <span *ngIf="user?.user" class="mx-1 typeLetter" style="font-size: 18px;">{{user.user.nombre}} </span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser1">
           <li><a class="dropdown-item" type="button" href="#">Mi Perfil</a></li>

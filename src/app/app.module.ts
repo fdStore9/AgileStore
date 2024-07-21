@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './utils/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRegistrationComponent } from './components/login-registration/login-registration.component';
 import { FormsComponent } from './shared/forms/forms.component';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -19,6 +19,9 @@ import { SpinnerComponent } from './utils/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NgbAlertModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { JsonPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     LoginRegistrationComponent,
     FormsComponent,
     SpinnerComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AngularFirestoreModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    FormsModule,
+    NgbModule,
+    NgbDatepickerModule,
+    NgbAlertModule,
+    JsonPipe,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

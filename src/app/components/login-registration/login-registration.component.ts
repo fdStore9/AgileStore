@@ -57,9 +57,9 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
         placeholder: 'Seleccione',
         title: 'Rol',
         options: [
-          { label: 'Admin', value: 'admin' },
-          { label: 'Mesero', value: 'user' },
-          { label: 'Otro', value: 'guest' }
+          { label: 'Admin', value: 'Administrador' },
+          { label: 'Mesero', value: 'Mesero' },
+          { label: 'Otro', value: 'Otro' }
         ],
         validation: [Validators.required],
         class: 'col-md-6',

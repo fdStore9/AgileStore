@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from '../models/usuario.model';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { FirebaseError } from 'firebase/app';
+import * as authActions from '../shared/auth.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.reducer';
 
 interface CreateUserResponse {
   status: number;
@@ -15,27 +18,47 @@ interface CreateUserResponse {
 })
 export class LoginService {
   userSubscription: Subscription;
-  private _user: Usuario;
+  private _user: Usuario | null = null;
 
   get user() {
     return this._user
   }
-  constructor(public auth: AngularFireAuth, private firestore: AngularFirestore) { }
+  constructor(public auth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    private store: Store<AppState>) { }
 
-  initAuthListener() {
-    this.auth.authState.subscribe(fuser => {
-      if (fuser) {
-        this.userSubscription = this.firestore.doc(`${fuser.uid}/profiles`).valueChanges()
-          .subscribe((firestoreUser: any) => {
-            const user = Usuario.fromFirebase(firestoreUser);
-            if (user) {
-              this._user = user;
-            }
-          })
-      }
-    });
+    initAuthListener() {
+      this.auth.authState.subscribe(fuser => {
+        if (fuser) {
+          this.userSubscription = this.firestore.doc(`profiles/${fuser.uid}`).valueChanges()
+            .subscribe({
+              next: (firestoreUser: any) => {
+                if (!firestoreUser) {
+                  console.warn('Usuario no encontrado en Firestore');
+                  return;
+                }
+                const user = Usuario.fromFirebase(firestoreUser);
+                this._user = user;
+                if (user) {
+                  this.store.dispatch(authActions.setUser({ user }));
+                }
+              },
+              error: (error) => {
+                console.error('Error al obtener datos del usuario:', error);
+              }
+            });
+        } else {
+          this._user = {} as Usuario;
+          if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
+          }
+          this.store.dispatch(authActions.unSetUser());
+        }
+      });
+    }
+    
+    
 
-  }
   async createUser(password: string, email: string, nombre: string, apellido: string, rol: string): Promise<CreateUserResponse> {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(email, password);
@@ -86,5 +109,10 @@ export class LoginService {
   }
   logout() {
     return this.auth.signOut();
+  }
+  isAuth() {
+    return this.auth.authState.pipe(
+      map(fbUser => fbUser != null)
+    );
   }
 }
