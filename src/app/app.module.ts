@@ -24,6 +24,7 @@ import { NgbAlertModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng
 import { DatePickerComponent } from './shared/date-picker/date-picker.component';
 import { JsonPipe } from '@angular/common';
 import { TablesComponent } from './components/tables/tables.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TablesComponent } from './components/tables/tables.component';
     SpinnerComponent,
     UserProfileComponent,
     DatePickerComponent,
-    TablesComponent
+    TablesComponent,
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,

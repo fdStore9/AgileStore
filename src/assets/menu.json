@@ -45,7 +45,7 @@
       "id": "5",
       "title": "Productos",
       "icon": "bi bi-list-task",
-      "url": "/ayuda",
+      "url": "/listProducts",
       "submenu": []
     },
     {
