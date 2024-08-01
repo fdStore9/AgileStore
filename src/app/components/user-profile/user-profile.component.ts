@@ -61,7 +61,7 @@ export class UserProfileComponent implements OnDestroy, OnInit {
     this.uiSubscription.unsubscribe();
   }
   handleDateChange(date: { day: number; month: number; year: number }) {
-    debugger;
+    ;
     const formattedDate = date.day ? `${date.day} de ${this.getMonthName(date.month)} de ${date.year}` : date;
     this.user.fechaNacimiento = formattedDate as any;
   }
@@ -97,7 +97,7 @@ export class UserProfileComponent implements OnDestroy, OnInit {
         })
       }
       await this.fileUpload.updateDocument('profiles', this.user.uid, this.user).then((rs) => {
-        console.log(rs);
+        (rs);
       })
       this.store.dispatch(ui.stopLoading());
       this.isEditing = false; // Salir del modo edición después de guardar

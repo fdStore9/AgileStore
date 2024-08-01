@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   openSubmenuIndex: number | null = null;
   uiSubscription: Subscription;
   user: any;
-
+  defaultImage = '../../../assets/images/user.png';
   constructor(private readonly menu: MenuService,
     private readonly loginService: LoginService,
     private router: Router,
@@ -29,6 +29,7 @@ export class SidebarComponent implements OnInit {
     this.uiSubscription = this.store.select('user')
       .subscribe(setUser => {
         this.user = setUser;
+        (this.user)
       });
     this.menu.getMenu().subscribe((rs: any) => {
       this.listMenu = rs.menu.sort((a: any, b: any) => a.title.localeCompare(b.title));

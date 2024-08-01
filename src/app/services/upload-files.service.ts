@@ -17,7 +17,7 @@ export class UploadFilesService {
      private store: Store<AppState>) { }
 
      async uploadFile(file: File, name: string): Promise<string> {
-      debugger
+      
       if (!file) {
         return Promise.reject('No file provided');
       }
@@ -34,7 +34,7 @@ export class UploadFilesService {
         uploadTask.on('state_changed',
           (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Progreso de la carga:', progress);
+            ('Progreso de la carga:', progress);
           },
           (error) => {
             console.error('Error al cargar el archivo:', error);
@@ -42,9 +42,9 @@ export class UploadFilesService {
           },
           async () => {
             try {
-              console.log("El archivo se subió exitosamente!");
+              ("El archivo se subió exitosamente!");
               const url = await getDownloadURL(fileRef);
-              console.log("URL del archivo: ", url);
+              ("URL del archivo: ", url);
               resolve(url);
             } catch (error) {
               console.error('Error al obtener la URL de descarga:', error);

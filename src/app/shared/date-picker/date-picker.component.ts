@@ -24,7 +24,7 @@ export class DatePickerComponent implements OnInit {
     this.user$ = this.store.select('user');
   }
   ngOnInit(): void {
-    console.log(this.fechaNacimiento, 'fabian');
+    (this.fechaNacimiento, 'fabian');
     this.model = this.parseDate(this.fechaNacimiento);
   }
 
