@@ -16,7 +16,11 @@ export class DatePickerComponent implements OnInit {
   model: NgbDateStruct;
   user$: Observable<Usuario>;
   user: Usuario = new Usuario();
+  minDate: NgbDateStruct;
+
   constructor(private store: Store<{ user: Usuario }>) {
+    this.minDate = { year: 1950, month: 1, day: 1 };
+
     this.user$ = this.store.select('user');
   }
   ngOnInit(): void {
