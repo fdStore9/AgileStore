@@ -138,6 +138,7 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
     }
   }
   createUser(formsValue: any) {
+    this.store.dispatch(ui.isLoading());
     this.loginService.createUser(
       formsValue.contraseniaR.value,
       formsValue.email.value,

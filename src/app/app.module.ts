@@ -10,8 +10,9 @@ import { LoginRegistrationComponent } from './components/login-registration/logi
 import { FormsComponent } from './shared/forms/forms.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage'; // <-- Asegúrate de que este import esté presente
+import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -41,6 +42,7 @@ import { JsonPipe } from '@angular/common';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule, // <-- Asegúrate de que este import esté presente
     BrowserAnimationsModule,
     NgxSpinnerModule,
     FormsModule,

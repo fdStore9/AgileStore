@@ -29,35 +29,57 @@ export class LoginService {
 
     initAuthListener() {
       this.auth.authState.subscribe(fuser => {
-        if (fuser) {
-          this.userSubscription = this.firestore.doc(`profiles/${fuser.uid}`).valueChanges()
-            .subscribe({
-              next: (firestoreUser: any) => {
-                if (!firestoreUser) {
-                  console.warn('Usuario no encontrado en Firestore');
-                  return;
-                }
-                const user = Usuario.fromFirebase(firestoreUser);
-                this._user = user;
-                if (user) {
-                  this.store.dispatch(authActions.setUser({ user }));
-                }
-              },
-              error: (error) => {
-                console.error('Error al obtener datos del usuario:', error);
+          if (fuser) {
+              this.userSubscription = this.firestore.doc(`profiles/${fuser.uid}`).valueChanges()
+                  .subscribe({
+                      next: (firestoreUser: any) => {
+                          const user = Usuario.fromFirebase(firestoreUser);
+  
+                          if (user) {
+                              // Asegúrate de clonar el objeto usuario completamente
+                              const updatedSkills = user.skills.map(skill => ({
+                                  id: skill.id,
+                                  name: skill.name,
+                                  selected: skill.selected || false  // Asegura que 'selected' esté definido
+                              }));
+  
+                              // Crea una nueva instancia del usuario con los skills actualizados
+                              const updatedUser = new Usuario(
+                                  user.uid,
+                                  user.nombre,
+                                  user.email,
+                                  user.apellido,
+                                  user.rol,
+                                  user.password,
+                                  user.phone,
+                                  updatedSkills,
+                                  user.experience,
+                                  user.profesion,
+                                  user.fechaNacimiento,
+                                  user.avatar
+                              );
+  
+                              // Dispatch para actualizar el estado en el store
+                              this.store.dispatch(authActions.setUser({ user: updatedUser }));
+                          }
+                      },
+                      error: (error) => {
+                          console.error('Error al obtener datos del usuario:', error);
+                      }
+                  });
+          } else {
+              this._user = new Usuario(); // Crear un usuario vacío
+              if (this.userSubscription) {
+                  this.userSubscription.unsubscribe();
               }
-            });
-        } else {
-          this._user = {} as Usuario;
-          if (this.userSubscription) {
-            this.userSubscription.unsubscribe();
+              this.store.dispatch(authActions.unSetUser());
           }
-          this.store.dispatch(authActions.unSetUser());
-        }
       });
-    }
-    
-    
+  }
+  
+  
+
+
 
   async createUser(password: string, email: string, nombre: string, apellido: string, rol: string): Promise<CreateUserResponse> {
     try {
