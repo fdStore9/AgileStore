@@ -34,7 +34,6 @@ export class UploadFilesService {
         uploadTask.on('state_changed',
           (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            ('Progreso de la carga:', progress);
           },
           (error) => {
             console.error('Error al cargar el archivo:', error);
@@ -44,7 +43,6 @@ export class UploadFilesService {
             try {
               ("El archivo se subió exitosamente!");
               const url = await getDownloadURL(fileRef);
-              ("URL del archivo: ", url);
               resolve(url);
             } catch (error) {
               console.error('Error al obtener la URL de descarga:', error);
