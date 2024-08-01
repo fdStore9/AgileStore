@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginRegistrationComponent } from './components/login-registration/login-registration.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthGuard } from './services/auth.guard';
+import { TablesComponent } from './components/tables/tables.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'userProfile',
     component: UserProfileComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'tables',
+    component: TablesComponent,
     canActivate: [ AuthGuard ],
   },
   { path: '**', redirectTo: '' }

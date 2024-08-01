@@ -23,6 +23,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { NgbAlertModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerComponent } from './shared/date-picker/date-picker.component';
 import { JsonPipe } from '@angular/common';
+import { TablesComponent } from './components/tables/tables.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { JsonPipe } from '@angular/common';
     FormsComponent,
     SpinnerComponent,
     UserProfileComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    TablesComponent
   ],
   imports: [
     BrowserModule,

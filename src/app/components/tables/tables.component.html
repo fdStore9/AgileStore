@@ -1,0 +1,29 @@
+<app-sidebar></app-sidebar>
+<div class="container-fluid mt-4 my-5">
+    <div class="mb-4 d-flex justify-content-center">
+        <div class="input-group" style="max-width: 300px;">
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Buscar Mesa" 
+                [(ngModel)]="searchTerm" 
+                (input)="filterMesas()"
+            >
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let mesa of filteredMesas" class="col-sm-3 mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-center">
+                  <strong> Mesa {{ mesa.id }}</strong> 
+                </div>
+                <div class="card-body">
+                    <img src="../../../assets/images/tables.png" class="card-img-top" alt="Imagen de mesa">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
