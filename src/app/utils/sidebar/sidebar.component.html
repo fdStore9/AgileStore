@@ -11,18 +11,18 @@
         <li *ngFor="let item of listMenu; let i = index" class="nav-item dropdown"
           [class.dropdown]="item.submenu && item.submenu.length > 0">
           <a *ngIf="item.submenu && item.submenu.length > 0"
-            class="nav-link dropdown-toggle d-flex align-items-center typeLetter" href="#" id="navbarDropdown{{i}}"
+            class="nav-link dropdown-toggle d-flex align-items-center typeLetter" [routerLink]="item.url" id="navbarDropdown{{i}}"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i [ngClass]="item.icon + ' icon-blue'" class="fs-4 me-2"></i> {{ item.title }}
           </a>
-          <a *ngIf="!item.submenu || item.submenu.length === 0" class="nav-link d-flex align-items-center typeLetter "
-            href="#">
+          <a *ngIf="!item.submenu || item.submenu.length === 0" 
+            class="nav-link d-flex align-items-center typeLetter" [routerLink]="item.url">
             <i [ngClass]="item.icon + ' icon-blue'" class="fs-4 me-2"></i> {{ item.title }}
           </a>
           <ul *ngIf="item.submenu && item.submenu.length > 0" class="dropdown-menu"
             [attr.aria-labelledby]="'navbarDropdown' + i">
             <li *ngFor="let subItem of item.submenu">
-              <a [routerLink]="subItem.route" class="dropdown-item d-flex align-items-center">
+              <a [routerLink]="subItem.url" class="dropdown-item d-flex align-items-center">
                 <i [ngClass]="subItem.icon + ' icon-blue'" class="fs-6 me-2"></i> {{ subItem.title }}
               </a>
             </li>
@@ -38,7 +38,7 @@
           <span *ngIf="user?.user" class="mx-1 typeLetter" style="font-size: 18px;">{{user.user.nombre}} </span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" type="button" href="/userProfile">Mi Perfil</a></li>
+          <li><a class="dropdown-item" type="button" [routerLink]="'/userProfile'">Mi Perfil</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>

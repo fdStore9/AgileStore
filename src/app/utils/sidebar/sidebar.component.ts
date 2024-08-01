@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
-import { Usuario } from '../../models/usuario.model';
-import { Observable, Subscription } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../app.reducer';
 
 @Component({

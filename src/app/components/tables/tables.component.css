@@ -11,8 +11,14 @@
     max-width: 900px;
   }
   .card-img-top {
-    width: 100%; /* Ajusta el ancho para que la imagen ocupe el 100% del contenedor de la tarjeta */
-    height: auto; /* Mantiene la relación de aspecto de la imagen */
-    object-fit: cover; /* Opcional: ajusta cómo se recorta la imagen si no encaja perfectamente */
+    width: 100%;
+    height: auto; 
+    object-fit: cover;
 }
-  
+.border-success {
+  border: 2px solid green;
+}
+
+.border-danger {
+  border: 2px solid red;
+}
