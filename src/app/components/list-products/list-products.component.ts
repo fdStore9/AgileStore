@@ -35,5 +35,11 @@ export class ListProductsComponent implements OnInit {
       }
     );
   }
+  deleteProduct(idPruct: string) {
+
+  }
+  editProduct(product: products) {
+
+  }
 
 }
