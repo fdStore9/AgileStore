@@ -25,6 +25,8 @@ import { DatePickerComponent } from './shared/date-picker/date-picker.component'
 import { JsonPipe } from '@angular/common';
 import { TablesComponent } from './components/tables/tables.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
+import { ProductModalComponent } from './shared/product-modal/product-modal.component';
+import { CurrencyFormatDirective } from './utils/directive/currencyFormat';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ListProductsComponent } from './components/list-products/list-products.
     UserProfileComponent,
     DatePickerComponent,
     TablesComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    ProductModalComponent,
+    CurrencyFormatDirective
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { Usuario } from '../models/usuario.model';
 import * as authActions from '../shared/auth.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,8 @@ export class UploadFilesService {
         console.error('Error updating document: ', error);
         throw error;
       });
+  }
+  getMesas(): Observable<any[]> {
+    return this.firestore.collection('products').valueChanges();
   }
 }

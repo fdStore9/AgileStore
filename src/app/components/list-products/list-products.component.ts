@@ -1,53 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { products } from '../../models/products';
+import { Observable } from 'rxjs';
+import { UploadFilesService } from '../../services/upload-files.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductModalComponent } from '../../shared/product-modal/product-modal.component';
 
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.css'
 })
-export class ListProductsComponent implements OnInit{
-  products = [
-    {
-      name: 'Pan de Miel',
-      price: 5.00,
-      description: 'Delicioso pan de miel recién horneado, perfecto para el desayuno.',
-      image: 'https://via.placeholder.com/400x300'
-    },
-    {
-      name: 'Croissant',
-      price: 3.00,
-      description: 'Crujiente croissant con relleno de chocolate, ideal para cualquier momento del día.',
-      image: 'https://via.placeholder.com/400x300'
-    },
-    {
-      name: 'Tarta de Manzana',
-      price: 7.00,
-      description: 'Tarta de manzana casera con una masa crujiente y relleno de manzanas frescas.',
-      image: 'https://via.placeholder.com/400x300'
-    },
-    {
-      name: 'Pan de Miel',
-      price: 5.00,
-      description: 'Delicioso pan de miel recién horneado, perfecto para el desayuno.',
-      image: 'https://via.placeholder.com/400x300'
-    },
-    {
-      name: 'Croissant',
-      price: 3.00,
-      description: 'Crujiente croissant con relleno de chocolate, ideal para cualquier momento del día.',
-      image: 'https://via.placeholder.com/400x300'
-    },
-    {
-      name: 'Tarta de Manzana',
-      price: 7.00,
-      description: 'Tarta de manzana casera con una masa crujiente y relleno de manzanas frescas.',
-      image: 'https://via.placeholder.com/400x300'
-    }
-  ];
+export class ListProductsComponent implements OnInit {
 
-  constructor() { }
+  products$: Observable<any[]>;
+  listProducts: Array<products>;
+  constructor(private fileService: UploadFilesService,
+    private modalService: NgbModal
+  ) { }
+
   ngOnInit(): void {
-    
+    this.products$ = this.fileService.getMesas();
+    this.products$.subscribe((rs) => {
+      this.listProducts = rs;
+    })
+  }
+  openProductModal() {
+    const modalRef = this.modalService.open(ProductModalComponent, { size: 'lg', centered: true });
+    modalRef.result.then(
+      (result) => {
+        console.log('Modal result:', result);
+      },
+      (reason) => {
+        console.log('Modal dismissed: ', reason);
+      }
+    );
   }
 
 }

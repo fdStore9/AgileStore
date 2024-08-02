@@ -1,17 +1,17 @@
 <app-sidebar></app-sidebar>
+
 <div class="container-fluid mt-4">
-<div class="row">
-  <div class="col-sm-6 col-md-4 mb-4" *ngFor="let product of products">
-    <div class="card product-card">
-      <img [src]="product.image" class="card-img-top" [alt]="product.name">
-      <div class="card-body">
-        <h5 class="product-name">{{ product.name }}</h5>
-        <p class="product-price">{{ product.price | currency:'USD' }}</p>
-        <p class="card-text">{{ product.description }}</p>
+  <button type="button" class="btn btn-primary" (click)="openProductModal()">Crear Producto</button>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 mb-4" *ngFor="let product of this.listProducts">
+      <div class="card product-card">
+        <img [src]="product.avatar" class="card-img-top" [alt]="product.nombreProducto">
+        <div class="card-body">
+          <h5 class="product-name">{{ product.nombreProducto }}</h5>
+          <p class="product-price">{{ product.precio | currency:'USD' }}</p>
+          <p class="card-text">{{ product.descripcionProducto }}</p>
         </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-
-  

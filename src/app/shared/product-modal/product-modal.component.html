@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h5 class="modal-title typeLetter" id="productModalLabel">Crear Producto</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+        <div class="row mb-3">
+            <div class="col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-aspect-ratio"></i></span>
+                    <input type="text" placeholder="Nombre" class="form-control" id="productName" name="name"
+                        [(ngModel)]="product.nombreProducto" required>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                    <input type="text" placeholder="Precio" class="form-control" id="productPrice" name="price"
+                        [(ngModel)]="product.precio" appCurrencyFormat required>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 col-sm-12 mb-3">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-file-text"></i></span>
+                        <textarea class="form-control" id="productDescription" name="description" rows="2"
+                            placeholder="Descripción" [(ngModel)]="product.descripcionProducto"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <label class="input-group-text" for="imageUpload"><i class="bi bi-card-image"></i></label>
+                    <input type="file" class="form-control" id="imageUpload" name="image" accept="image/*"
+                        (change)="onImageChange($event)">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Cerrar</button>
+        </div>
+    </form>
+</div>
