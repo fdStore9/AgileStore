@@ -1,42 +1,22 @@
-/* Estilos específicos para el componente de productos */
-.product-card {
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-  }
-  
-  .product-card img {
-    border-bottom: 1px solid #ddd;
-    height: 200px; /* Ajusta la altura de la imagen para mantener las tarjetas compactas */
-    object-fit: cover; /* Mantiene la proporción de la imagen sin distorsionarla */
-  }
-  
-  .product-card:hover {
-    transform: scale(1.02); /* Menor escala al pasar el cursor */
-  }
-  
-  .product-name {
-    font-size: 1rem; /* Tamaño de fuente más pequeño */
-    font-weight: bold;
-    margin: 0.5rem 0;
-  }
-  
-  .product-price {
-    color: #28a745;
-    font-size: 1rem; /* Tamaño de fuente más pequeño */
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-body {
-    padding: 0.5rem; /* Menor padding en la tarjeta para mantener el diseño compacto */
-  }
-  
-  .card-text {
-    font-size: 0.875rem; /* Tamaño de fuente más pequeño para la descripción */
-  }
-  
-  .container {
-    padding: 1rem; /* Menor padding en el contenedor */
-  }
-  
+body {
+	background-color: #f5f7fa;
+}
+
+.testimonial-card .card-up {
+  height: 120px;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.aqua-gradient {
+  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+}
+
+.testimonial-card .avatar {
+  width: 120px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 50%;
+}

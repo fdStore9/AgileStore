@@ -1,11 +1,11 @@
 <app-sidebar></app-sidebar>
 
-<div class="container-fluid mt-4">
-  <button type="button" class="btn btn-primary" (click)="openProductModal()">Crear Producto</button>
+<!-- <div class="container-fluid mt-4">
+
   <div class="row">
     <div class="col-sm-6 col-md-4 mb-4" *ngFor="let product of this.listProducts">
       <div class="card product-card">
-        <img [src]="product.avatar" class="card-img-top" [alt]="product.nombreProducto">
+        <img [src]="product.avatar" class="card-img-top img-fluid" [alt]="product.nombreProducto">
         <div class="card-body">
           <h5 class="product-name">{{ product.nombreProducto }}</h5>
           <p class="product-price">{{ product.precio | currency:'USD' }}</p>
@@ -14,4 +14,29 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-flex justify-content-end mb-4 mt-2">
+      <button type="button" class="btn btn-primary" (click)="openProductModal()"><i class="bi bi-floppy-fill"></i>
+        Crear</button>
+    </div>
+    <div class="col-sm-6 col-md-4 mb-4" *ngFor="let product of this.listProducts">
+      <section class="mx-auto" style="max-width: 23rem;">
+        <div class="card testimonial-card mt-2 mb-3">
+          <div class="card-up aqua-gradient"></div>
+          <div class="avatar mx-auto white">
+            <img [src]="product.avatar" [alt]="product.nombreProducto" class="rounded-circle img-fluid"
+              alt="woman avatar">
+          </div>
+          <div class="card-body text-center">
+            <h4 class="card-title font-weight-bold">{{ product.nombreProducto }}</h4>
+            <hr>
+            <p><i class="fas fa-quote-left"></i> {{ product.descripcionProducto }}</p>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
