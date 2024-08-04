@@ -23,6 +23,7 @@ export class ProductModalComponent implements OnInit {
   alerts: SweetAlert;
   uiSubscription: Subscription;
   isLoading: boolean = false;
+  tittleModal: string = "Crear Producto";
   constructor(public activeModal: NgbActiveModal,
     private fileUpload: UploadFilesService,
     private store: Store<AppState>,
@@ -34,6 +35,7 @@ export class ProductModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.productEdit?.id) {
       this.product = this.productEdit;
+      this.tittleModal = "Actualizar Producto";
     }
     this.uiSubscription = this.store.select('ui')
       .subscribe(ui => {
@@ -58,6 +60,18 @@ export class ProductModalComponent implements OnInit {
         this.product.avatar = rs;
       })
     }
+    this.productEdit?.id ? this.updateProduct() : this.createProduct();
+
+  }
+  async updateProduct() {
+    await this.productService.updateDocument('products', this.product.id, this.product).then((rs: any) => {
+      this.store.dispatch(ui.stopLoading());
+      rs.status === 200 ? this.alerts.showAlert(MessagesToShow.success.GOOD, "success", MessagesToShow.success.SUCCESSFUL_UPDATE) :
+        this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error)
+      this.activeModal.close();
+    })
+  }
+  async createProduct() {
     this.product.id = this.generateRandomId();
     await this.productService.createDocument('products', this.product).then((rs: any) => {
       this.store.dispatch(ui.stopLoading());

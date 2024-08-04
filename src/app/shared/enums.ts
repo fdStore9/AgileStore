@@ -1,6 +1,7 @@
 export const MessagesToShow = {
     success: {
         SUCCESSFUL_REGISTRATION: 'Registro creado',
+        SUCCESSFUL_UPDATE: 'Registro Actualizado',
         GOOD: 'Excelente',
         SUCCESSFUL_DELETE: 'Registro Eliminado',
     },
