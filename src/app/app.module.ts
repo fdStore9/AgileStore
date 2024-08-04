@@ -27,6 +27,7 @@ import { TablesComponent } from './components/tables/tables.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
 import { ProductModalComponent } from './shared/product-modal/product-modal.component';
 import { CurrencyFormatDirective } from './utils/directive/currencyFormat';
+import { AlertsComponent } from './utils/alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CurrencyFormatDirective } from './utils/directive/currencyFormat';
     TablesComponent,
     ListProductsComponent,
     ProductModalComponent,
-    CurrencyFormatDirective
+    CurrencyFormatDirective,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,

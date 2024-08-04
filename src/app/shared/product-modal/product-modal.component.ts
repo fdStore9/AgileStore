@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { products } from '../../models/products';
 import { UploadFilesService } from '../../services/upload-files.service';
@@ -16,6 +16,7 @@ import * as ui from '../../shared/ui.actions';
   styleUrl: './product-modal.component.css'
 })
 export class ProductModalComponent implements OnInit {
+  @Input() productEdit: products;
   product: products;
   selectedImage: File | null = null;
   formattedPrice: string = '';
@@ -31,6 +32,9 @@ export class ProductModalComponent implements OnInit {
     this.alerts = new SweetAlert();
   }
   ngOnInit(): void {
+    if (this.productEdit?.id) {
+      this.product = this.productEdit;
+    }
     this.uiSubscription = this.store.select('ui')
       .subscribe(ui => {
         this.isLoading = ui.isLoading;
@@ -59,7 +63,7 @@ export class ProductModalComponent implements OnInit {
       this.store.dispatch(ui.stopLoading());
       rs.status === 200 ? this.alerts.showAlert(MessagesToShow.success.GOOD, "success", MessagesToShow.success.SUCCESSFUL_REGISTRATION) :
         this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error)
-      this.activeModal.close({ product: this.product, file: this.selectedImage });
+      this.activeModal.close();
     })
   }
   generateRandomId(length: number = 16): string {

@@ -4,6 +4,7 @@ export class products {
     nombreProducto: string;
     precio: any;
     descripcionProducto: string;
+    quantity: number
 
     constructor() {
         this.id ="";
@@ -11,5 +12,6 @@ export class products {
         this.nombreProducto = "";
         this.precio;
         this.descripcionProducto = "";
+        this.quantity = 1
     }
 }

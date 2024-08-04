@@ -65,7 +65,5 @@ export class UploadFilesService {
         throw error;
       });
   }
-  getMesas(): Observable<any[]> {
-    return this.firestore.collection('products').valueChanges();
-  }
+ 
 }

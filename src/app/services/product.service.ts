@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { products } from '../models/products';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,18 @@ export class ProductService {
       return { status: 500, message: 'Error creating document' };
     }
   }
+  async deleteDocument(collectionName: string, documentId: string): Promise<{ status: number; message: string }> {
+    try {
+      const docRef = this.firestore.collection(collectionName).doc(documentId);
+      await docRef.delete();
+      return { status: 200, message: 'Document deleted successfully' };
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+      return { status: 500, message: 'Error deleting document' };
+    }
+  }
 
-
+  getListProduct(): Observable<any[]> {
+    return this.firestore.collection('products').valueChanges();
+  }
 }
