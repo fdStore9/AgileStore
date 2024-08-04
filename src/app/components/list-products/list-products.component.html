@@ -2,11 +2,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="d-flex justify-content-end mb-4 mt-2">
-      <button type="button" class="btn btn-primary" (click)="openProductModal()">
-        <i class="bi bi-floppy-fill"></i> Crear
+      <button type="button" class="btn btn-primary" [ngClass]="{ 'pulse-animation': listProducts.length === 0 }"
+        (click)="openProductModal()">
+        <strong><i class="bi bi-floppy-fill"></i> Crear</strong>
       </button>
     </div>
-    <app-alerts [showAlert]="this.listProducts.length === 0"></app-alerts>
+    <app-alerts [showAlert]="listProducts.length === 0"></app-alerts>
     <div class="col-sm-6 col-md-4 mb-4" *ngFor="let product of this.listProducts">
       <section class="mx-auto" style="max-width: 23rem;">
         <div class="card testimonial-card mt-2 mb-3" style="height: 100%;">
