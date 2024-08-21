@@ -25,6 +25,10 @@ import { DatePickerComponent } from './shared/date-picker/date-picker.component'
 import { JsonPipe } from '@angular/common';
 import { TablesComponent } from './components/tables/tables.component';
 import { ListProductsComponent } from './components/list-products/list-products.component';
+import { HomeComponent } from './components/home/home.component';
+import { StoreComponent } from './components/store/store.component';
+import { TodayMenuComponent } from './components/today-menu/today-menu.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { ListProductsComponent } from './components/list-products/list-products.
     UserProfileComponent,
     DatePickerComponent,
     TablesComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    HomeComponent,
+    StoreComponent,
+    TodayMenuComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

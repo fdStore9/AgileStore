@@ -4,12 +4,12 @@
       "id": "1",
       "title": "Inicio",
       "icon": "bi bi-house",
-      "url": "/inicio",
+      "url": "/home",
       "submenu": []
     },
     {
       "id": "2",
-      "title": "Dashboard",
+      "title": "Pedidos",
       "icon": "bi bi-clipboard-data",
       "url": "/perfil",
       "submenu": []
@@ -23,9 +23,16 @@
     },
     {
       "id": "4",
-      "title": "Ordenes",
+      "title": "Bodega",
       "icon": "bi bi-archive",
-      "url": "/configuracion",
+      "url": "/bodega",
+      "submenu": []
+    },
+    {
+      "id": "5",
+      "title": "Menu del día",
+      "icon": "bi bi-card-checklist",
+      "url": "/ayuda",
       "submenu": [
         {
           "title": "Abiertas",
@@ -40,20 +47,7 @@
           "submenu": []
         }
       ]
-    },
-    {
-      "id": "5",
-      "title": "Productos",
-      "icon": "bi bi-list-task",
-      "url": "/listProducts",
-      "submenu": []
-    },
-    {
-      "id": "6",
-      "title": "Reportes",
-      "icon": "bi bi-card-checklist",
-      "url": "/ayuda",
-      "submenu": []
     }
   ]
+
 }
