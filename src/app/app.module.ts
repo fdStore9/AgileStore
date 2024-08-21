@@ -29,6 +29,9 @@ import { HomeComponent } from './components/home/home.component';
 import { StoreComponent } from './components/store/store.component';
 import { TodayMenuComponent } from './components/today-menu/today-menu.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { ProductModalComponent } from './shared/product-modal/product-modal.component';
+import { CurrencyFormatDirective } from './utils/directive/currencyFormat';
+import { AlertsComponent } from './utils/alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { OrdersComponent } from './components/orders/orders.component';
     HomeComponent,
     StoreComponent,
     TodayMenuComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductModalComponent,
+    CurrencyFormatDirective,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
