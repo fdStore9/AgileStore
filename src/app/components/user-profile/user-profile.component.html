@@ -1,14 +1,15 @@
-<app-sidebar></app-sidebar>
 <div class="container emp-profile">
   <div class="row">
     <div class="col-md-4">
       <div class="profile-img">
-        <img [src]="user.avatar || defaultImage" alt="User Image" class="img-fluid" />
-        <div class="file btn btn-lg btn-primary">
+        <img [src]="user.avatar || defaultImage" alt="User Image" class="img-fluid avatar p-3" />
+        <hr>
+        <div class="file btn btn-md btn-primary">
           Actualizar foto
           <input type="file" name="file" (change)="onFileChange($event)" />
         </div>
       </div>
+      
     </div>
     <div class="col-md-6">
       <div class="profile-head">

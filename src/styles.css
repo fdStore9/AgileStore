@@ -22,3 +22,10 @@
     font-weight: 700;
     src: url('app/utils/styles/fonts/Nunito-Bold.ttf') format('truetype');
   }
+
+  @font-face {
+    font-family: 'Twinkling';
+    font-style: normal;
+    font-weight: 700;
+    src: url('app/utils/styles/fonts/Twinkling.ttf') format('truetype');
+  }

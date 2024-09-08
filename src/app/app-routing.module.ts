@@ -51,7 +51,7 @@ const routes: Routes = [
     component: OrdersComponent,
     canActivate: [ AuthGuard ],
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', pathMatch:'full', redirectTo: '' },
 ];
 
 @NgModule({

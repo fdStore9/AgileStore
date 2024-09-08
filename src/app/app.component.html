@@ -1,2 +1,11 @@
 <app-spinner></app-spinner>
-<router-outlet><router-outlet />
+
+<div *ngIf="mostrarNavbar">
+    <app-sidebar></app-sidebar>
+</div>
+
+<div>
+
+    <router-outlet></router-outlet>
+
+</div>

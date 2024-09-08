@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   uiSubscription: Subscription;
   user: any;
   defaultImage = '../../../assets/images/user.png';
+
   constructor(private readonly menu: MenuService,
     private readonly loginService: LoginService,
     private router: Router,
@@ -31,7 +32,8 @@ export class SidebarComponent implements OnInit {
         (this.user)
       });
     this.menu.getMenu().subscribe((rs: any) => {
-      this.listMenu = rs.menu.sort((a: any, b: any) => a.title.localeCompare(b.title));
+      // this.listMenu = rs.menu.sort((a: any, b: any) => a.title.localeCompare(b.title));
+      this.listMenu = rs.menu;
     })
   }
   toggleSubmenu(index: number): void {
