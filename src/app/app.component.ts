@@ -8,17 +8,20 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent  implements OnInit {
+export class AppComponent implements OnInit {
   title = 'AgileStore';
-  mostrarNavbar: boolean = true;
-  constructor(private loginService: LoginService,private router: Router) {
+  enNavbar: boolean = true;
+  enLogin: boolean = false;
+  constructor(private loginService: LoginService, private router: Router) {
     this.loginService.initAuthListener();
   }
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
+      this.enLogin = this.router.url !== '/';
+
       if (event instanceof NavigationEnd) {
-        this.mostrarNavbar = event.url !== '/';
+        this.enNavbar = event.url !== '/';
       }
     });
   }

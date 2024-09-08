@@ -132,7 +132,7 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
         formsValue.Contrasenia.value
       ).then(rs => {
         this.store.dispatch(ui.stopLoading());
-        rs.status === 200 ? this.router.navigate(['/listProducts']) :
+        rs.status === 200 ? this.router.navigate(['/home']) :
         this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error || "")
       });
     }

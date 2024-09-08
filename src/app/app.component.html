@@ -1,11 +1,10 @@
 <app-spinner></app-spinner>
 
-<div *ngIf="mostrarNavbar">
+<div *ngIf="enNavbar">
     <app-sidebar></app-sidebar>
 </div>
 
-<div>
-
+<div [ngClass]="{'container-fluid mt-4 my-5': enLogin}">
     <router-outlet></router-outlet>
-
 </div>
+  
