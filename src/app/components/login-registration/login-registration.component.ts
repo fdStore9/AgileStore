@@ -17,7 +17,7 @@ import * as ui from '../../shared/ui.actions';
   templateUrl: './login-registration.component.html',
   styleUrl: './login-registration.component.css'
 })
-export class LoginRegistrationComponent implements OnInit, OnDestroy {
+export class LoginRegistrationComponent implements OnInit {
   isLoginActive: boolean;
   ListInputLoginForm: Array<any>;
   ListInputRegisterForm: Array<any>;
@@ -115,9 +115,9 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.uiSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.uiSubscription.unsubscribe();
+  // }
   changueForm(name: string): void {
     this.isLoginActive = name === 'login';
   }
@@ -125,6 +125,7 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
     this.isLoginActive ? this.login(formsValue) : this.createUser(formsValue);
   }
   login(formsValue: any) {
+    debugger;
     this.store.dispatch(ui.isLoading());
     if (this.isLoginActive) {
       this.loginService.validateCredentials(
@@ -132,7 +133,7 @@ export class LoginRegistrationComponent implements OnInit, OnDestroy {
         formsValue.Contrasenia.value
       ).then(rs => {
         this.store.dispatch(ui.stopLoading());
-        rs.status === 200 ? this.router.navigate(['/home']) :
+        rs.status === 200 ? this.router.navigate(['/dashboard']) :
         this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error || "")
       });
     }

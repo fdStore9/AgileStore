@@ -9,51 +9,59 @@ import { HomeComponent } from './components/home/home.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { StoreComponent } from './components/store/store.component';
 import { TodayMenuComponent } from './components/today-menu/today-menu.component';
+import { DashboardComponent } from './utils/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginRegistrationComponent,
     canActivate: [],
   },
+  { path: '**', pathMatch:'full', redirectTo: '/login' },
   {
-    path: 'userProfile',
-    component: UserProfileComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'listProducts',
-    component: ListProductsComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'tables',
-    component: TablesComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'todayMenu',
-    component: TodayMenuComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'store',
-    component: StoreComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
-    path: 'orders',
-    component: OrdersComponent,
-    canActivate: [ AuthGuard ],
-  },
-  { path: '**', pathMatch:'full', redirectTo: '/' },
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [ 
+      {
+        path: 'userProfile',
+        component: UserProfileComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'listProducts',
+        component: ListProductsComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'tables',
+        component: TablesComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'todayMenu',
+        component: TodayMenuComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'store',
+        component: StoreComponent,
+        canActivate: [ AuthGuard ],
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        canActivate: [ AuthGuard ],
+      },
+      // { path: '**', pathMatch:'full', redirectTo: '/login' },
+    ],
 
-  { path: '**', redirectTo: '/home' } 
+  },
+  
 ];
 
 @NgModule({

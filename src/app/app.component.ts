@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
-      this.enLogin = this.router.url !== '/';
+      this.enLogin = this.router.url !== '/dashboard';
 
       if (event instanceof NavigationEnd) {
         this.enNavbar = event.url !== '/';
