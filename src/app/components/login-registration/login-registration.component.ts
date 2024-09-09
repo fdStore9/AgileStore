@@ -133,7 +133,7 @@ export class LoginRegistrationComponent implements OnInit {
         formsValue.Contrasenia.value
       ).then(rs => {
         this.store.dispatch(ui.stopLoading());
-        rs.status === 200 ? this.router.navigate(['/dashboard']) :
+        rs.status === 200 ? this.router.navigate(['/dashboard/home']) :
         this.alerts.showAlert(MessagesToShow.errorMessages.INVALID_ERROR, "error", rs.error || "")
       });
     }

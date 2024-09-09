@@ -15,53 +15,22 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginRegistrationComponent,
-    canActivate: [],
   },
-  { path: '**', pathMatch:'full', redirectTo: '/login' },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [ 
-      {
-        path: 'userProfile',
-        component: UserProfileComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'listProducts',
-        component: ListProductsComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'tables',
-        component: TablesComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'home',
-        component: HomeComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'todayMenu',
-        component: TodayMenuComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'store',
-        component: StoreComponent,
-        canActivate: [ AuthGuard ],
-      },
-      {
-        path: 'orders',
-        component: OrdersComponent,
-        canActivate: [ AuthGuard ],
-      },
-      // { path: '**', pathMatch:'full', redirectTo: '/login' },
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'userProfile', component: UserProfileComponent },
+      { path: 'listProducts', component: ListProductsComponent },
+      { path: 'tables', component: TablesComponent },
+      { path: 'home', component: HomeComponent },
+      { path: 'todayMenu', component: TodayMenuComponent },
+      { path: 'store', component: StoreComponent },
+      { path: 'orders', component: OrdersComponent },
     ],
-
   },
-  
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

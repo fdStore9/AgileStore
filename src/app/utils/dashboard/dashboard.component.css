@@ -1,32 +1,73 @@
-/* app.component.css */
-
-/* Estilo básico para el sidebar */
+/* Wrapper general para organizar sidebar y contenido principal */
 #wrapper {
-    display: flex;
-    width: 100%;
-  }
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar fija */
+#sidebar-wrapper {
+  position: fixed;    /* Fijar la sidebar */
+  top: 0;
+  left: 0;
+  width: 270px;       /* Ancho fijo */
+  height: 100%;       /* Ocupa toda la pantalla verticalmente */
+  background-color: #2B3035; /* Color de fondo */
+  overflow-y: auto;   /* Scroll si el contenido es más grande que la ventana */
+  z-index: 1;      /* Asegura que esté sobre otros elementos */
+  padding-top: 20px;  /* Espaciado superior */
+}
+
+/* Encabezado de la sidebar */
+.sidebar-heading {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Estilo para los ítems de la sidebar */
+.list-group-item {
+  padding-left: 1.5rem;
+  color: white;
+  border: none;
+}
+
+/* Para padding adicional en algunos ítems */
+.pl-5 {
+  padding-left: 2rem !important;
+}
+
+/* Mantener los ítems con tamaño fijo y evitar que se expandan */
+.list-group-item a {
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;  /* No permitir que el texto se rompa en varias líneas */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* Mostrar "..." si el texto es muy largo */
+  display: block;
+}
+
+/* Cambiar color de fondo al pasar el ratón sobre un ítem */
+.list-group-item a:hover {
+  background-color: #2B3035;
+}
+
+/* Contenedor del contenido principal */
+#page-content-wrapper {
+  flex: 1;
+  margin-left: 250px;  /* Separación para que no quede detrás de la sidebar */
+  padding: 106px;
+}
+
+/* Mostrar elementos colapsados cuando están activos */
+.collapse.show {
+  display: block !important;
+}
+
+
+.container-navbar {
+  position: fixed;
+  width: 84%;
+  margin-left: 270px;
+  z-index: 1; 
   
-  #sidebar-wrapper {
-    width: 250px;
-  }
-  
-  #page-content-wrapper {
-    flex: 1;
-  }
-  
-  .collapse.show {
-    display: block !important;
-  }
-  
-  .sidebar-heading {
-    padding: 0.75rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  
-  .list-group-item {
-    padding-left: 1.5rem;
-  }
-  
-  .pl-5 {
-    padding-left: 2rem !important;
-  }
+}

@@ -1,6 +1,7 @@
 .typeLetter {
     color: var(--background-color);
     font-family: 'Nunito-Bold', sans-serif;
+    margin-left: 10px;
 }
 .icon-blue {
     color: var(--events-default) !important;
@@ -18,5 +19,9 @@
 .tittleLetter {
     color: var(--background-color);
     font-family: 'Twinkling', sans-serif;
+}
+
+nav {
+    height: 74px;
 }
 
